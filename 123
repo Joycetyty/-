@@ -1,0 +1,24 @@
+start = datetime.datetime(2016,1,5)
+df_2317 = web.get_data_yahoo(['2317.TW'], start=start)
+df_2317.head()
+
+import matplotlib.pyplot as plt
+import pandas as pd
+stock_2317 = twstock.Stock('2317')
+
+stock_2317_2018 = stock_2317.fetch_from(2018,1)     # 獲取 2018 年 01 月至今日之股票資料
+stock_2317_2018_pd = pd.DataFrame(stock_2317_2018)
+stock_2317_2018_pd = stock_2317_2018_pd.set_index('date')
+
+
+fig = plt.figure(figsize=(10, 6))
+plt.plot(stock_2317_2018_pd.close, '-' , label="close price")
+plt.plot(stock_2317_2018_pd.open, '-' , label="open price")
+plt.title('鴻海 2018 Open/Close Price Line',loc='right')
+# loc->title的位置
+plt.xlabel('Date')
+plt.ylabel('Close price')
+plt.grid(True, axis='y')
+plt.legend()
+fig.savefig('03.png')
+
